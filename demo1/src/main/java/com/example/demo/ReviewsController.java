@@ -78,12 +78,8 @@ public class ReviewsController {
     // POST: Create a new review
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody Reviews review) {
-        Orders associatedOrder = OrdersRepository.findById(review.getOrder().getOrderId())
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-        review.setOrder(associatedOrder);
-
-        Reviews savedReview = reviewsRepository.save(review);
-        return ResponseEntity.ok(savedReview);
+        Reviews createdReview = reviewsRepository.save(review);
+        return ResponseEntity.ok(createdReview);
     }
 
 
